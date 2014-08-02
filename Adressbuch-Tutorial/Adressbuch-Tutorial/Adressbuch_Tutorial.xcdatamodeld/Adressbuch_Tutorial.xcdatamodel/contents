@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6172.12" systemVersion="13E28" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Person" representedClassName="Person" syncable="YES">
+        <attribute name="nachname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="plz" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stadt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="strasse" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="telnr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vorname" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Person" positionX="-2232" positionY="-1710" width="128" height="133"/>
+    </elements>
+</model>
