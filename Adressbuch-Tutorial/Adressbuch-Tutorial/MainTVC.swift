@@ -26,53 +26,53 @@ class MainTVC: UITableViewController, DetailVCDelegate {
     
     func refreshData() {
         var fetchRequest = NSFetchRequest(entityName: "Person")
-        daten = context.executeFetchRequest(fetchRequest, error: nil)
+        daten = context.executeFetchRequest(fetchRequest, error: nil)!
         tableView.reloadData()
     }
     
     
-    override func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return daten.count
     }
     
-    override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
-        cell.textLabel.text = "\(daten[indexPath.row].nachname), \(daten[indexPath.row].vorname)"
+        cell.textLabel?.text = "\(daten[indexPath.row].nachname), \(daten[indexPath.row].vorname)"
         return cell
     }
     
-    override func tableView(tableView: UITableView!, heightForRowAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 85
     }
     
-    override func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
     
-    override func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if editingStyle == .Delete {
             var fetchRequest = NSFetchRequest(entityName: "Person")
             let personToDelete = daten[indexPath.row] as Person
             fetchRequest.predicate = NSPredicate(format: "nachname = %@ && vorname = %@", personToDelete.nachname, personToDelete.vorname)
-            let tempArray = context.executeFetchRequest(fetchRequest, error: nil)
+            let tempArray = context.executeFetchRequest(fetchRequest, error: nil)!
             for tempPerson : AnyObject in tempArray {
                 context.deleteObject(tempPerson as Person)
             }
             context.save(nil)
             fetchRequest = NSFetchRequest(entityName: "Person")
-            daten = context.executeFetchRequest(fetchRequest, error: nil)
+            daten = context.executeFetchRequest(fetchRequest, error: nil)!
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }
     
-    override func tableView(tableView: UITableView!, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath!) -> String! {
+    override func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String {
         return "Löschen"
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if segue.identifier == "detail" {
-            let row = tableView.indexPathForCell(sender as UITableViewCell).row
+            let row = tableView.indexPathForCell(sender as UITableViewCell)!.row
             (segue.destinationViewController as detailVC).daten = daten[row] as? Person
             (segue.destinationViewController as detailVC).delegate = self
         }

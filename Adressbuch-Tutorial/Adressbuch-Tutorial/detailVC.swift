@@ -52,7 +52,7 @@ class detailVC: UIViewController {
     }
     
     func cancel() {
-        presentingViewController.dismissViewControllerAnimated(true, completion: nil)
+        presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func speichern() {
@@ -68,7 +68,7 @@ class detailVC: UIViewController {
         context.save(nil)
         
         delegate?.didAddPerson()
-        presentingViewController.dismissViewControllerAnimated(true, completion: nil)
+        presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }
